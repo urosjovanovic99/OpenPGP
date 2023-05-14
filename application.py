@@ -22,6 +22,6 @@ def load_gui():
 if __name__ == '__main__':
     load_gui()
     screen_manager = ScreenManager()
-    screen_manager.add_widget(OpenPGP(name="screen_two"))
-    screen_manager.add_widget(GenerateKeysScreen(name="screen_one"))
+    screen_manager.add_widget(OpenPGP(name="open_pgp_screen"))
+    screen_manager.add_widget(GenerateKeysScreen(name="generate_keys_screen"))
     OpenPGPApp().run()
