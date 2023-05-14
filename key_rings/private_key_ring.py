@@ -1,18 +1,19 @@
 import datetime
 import string
+import uuid
 
 
 class PrivateKeyRing:
     timestamp: datetime
-    keyId: int
+    keyId: uuid
     publicKey: int
     privateKey: int
     userId: string
 
-    def __init__(self, timestamp, keyId, publicKey, privateKey, userId) -> None:
+    def __init__(self, timestamp, publicKey, privateKey, userId) -> None:
         super().__init__()
         self.timestamp = timestamp
-        self.keyId = keyId
+        self.keyId = uuid.uuid4()
         self.publicKey = publicKey
         self.privateKey = privateKey
         self.userId = userId

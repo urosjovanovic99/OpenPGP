@@ -1,32 +1,55 @@
 <GenerateKeysScreen>:
     GridLayout:
-        rows: 5
         cols: 2
+        row_force_default: True
+        row_default_height: dp(50)
+        spacing: dp(10)
+        padding: dp(10)
+
         Label:
             text: 'Name'
+            halign: 'right'
+
         TextInput:
             text: root.data['name'] if 'name' in root.data else ''
             on_text: root.data['name'] = self.text
             multiline: False
+            hint_text: 'Input name'
+
         Label:
             text: 'Email'
+            halign: 'right'
+
         TextInput:
             text: root.data['email'] if 'email' in root.data else ''
             on_text: root.data['email'] = self.text
             multiline: False
+            hint_text: 'Input email'
+
         Label:
-            text: 'Key size'
+            text: 'Key Size'
+            halign: 'right'
+
         TextInput:
             text: root.data['key_size'] if 'key_size' in root.data else ''
             on_text: root.data['key_size'] = self.text
             multiline: False
+            hint_text: 'Input key size'
+
         Label:
-            text: 'Choose algorithm'
+            text: 'Choose Algorithm'
+            halign: 'right'
+
         Spinner:
             id: algorithm_spinner
             text: root.data['algorithm'] if 'algorithm' in root.data else 'Select algorithm'
             on_text: root.data['algorithm'] = self.text
             values: ['ELGamal and DSA', 'RSA']
+            size_hint_y: None
+            height: dp(50)
+
         Button:
             text: 'Confirm'
             on_press: root.confirm()
+            size_hint_x: None
+            width: dp(100)
