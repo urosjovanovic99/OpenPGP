@@ -5,20 +5,28 @@
         Label:
             text: 'Name'
         TextInput:
-            text: 'Input name'
+            text: root.data['name'] if 'name' in root.data else ''
+            on_text: root.data['name'] = self.text
+            multiline: False
         Label:
             text: 'Email'
         TextInput:
-            text: 'Input mail'
+            text: root.data['email'] if 'email' in root.data else ''
+            on_text: root.data['email'] = self.text
+            multiline: False
         Label:
             text: 'Key size'
         TextInput:
-            text: 'Input key size'
+            text: root.data['key_size'] if 'key_size' in root.data else ''
+            on_text: root.data['key_size'] = self.text
+            multiline: False
         Label:
             text: 'Choose algorithm'
         Spinner:
             id: algorithm_spinner
-            text: 'Select algorithm'
+            text: root.data['algorithm'] if 'algorithm' in root.data else 'Select algorithm'
+            on_text: root.data['algorithm'] = self.text
             values: ['ELGamal and DSA', 'RSA']
         Button:
             text: 'Confirm'
+            on_press: root.confirm()
