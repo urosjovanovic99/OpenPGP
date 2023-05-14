@@ -54,7 +54,7 @@
             size_hint_x: None
             width: dp(100)
 
-<Popups>:
+<ValidationPopup>:
     Label:
         text: "All fields are required"
         size_hint: 0.6, 0.2
@@ -62,5 +62,33 @@
 
     Button:
         text: "Close"
+        on_press: app.root.get_screen('generate_keys_screen').close_validation_popup()
         size_hint: 1, 0.4
+        pos_hint: {"x":0, "y":0.1}
+
+<InputPasswordPopup>:
+    orientation: 'vertical'
+    row_force_default: True
+    row_default_height: dp(50)
+    spacing: dp(10)
+    padding: dp(10)
+
+    Label:
+        text: "Input password"
+        size_hint: 0.6, 0.2
+        pos_hint: {"x":0.2, "top":1}
+
+    TextInput:
+        text: root.data['password'] if 'password' in root.data else ''
+        on_text: root.data['password'] = self.text
+        multiline: False
+        password: True
+        hint_text: 'Input password'
+        pos_hint: {"x":0, "y":0.5}
+        size_hint: 1, 0.2
+
+    Button:
+        text: "Confirm"
+        on_press: root.confirm()
+        size_hint: 1, 0.2
         pos_hint: {"x":0, "y":0.1}
