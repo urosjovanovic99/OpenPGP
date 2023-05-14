@@ -8,7 +8,7 @@
 
         Label:
             text: 'Name'
-            halign: 'right'
+            align: 'right'
 
         TextInput:
             text: root.data['name'] if 'name' in root.data else ''
@@ -18,7 +18,7 @@
 
         Label:
             text: 'Email'
-            halign: 'right'
+            align: 'right'
 
         TextInput:
             text: root.data['email'] if 'email' in root.data else ''
@@ -28,7 +28,7 @@
 
         Label:
             text: 'Key Size'
-            halign: 'right'
+            align: 'right'
 
         TextInput:
             text: root.data['key_size'] if 'key_size' in root.data else ''
@@ -38,7 +38,7 @@
 
         Label:
             text: 'Choose Algorithm'
-            halign: 'right'
+            align: 'right'
 
         Spinner:
             id: algorithm_spinner
