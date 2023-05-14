@@ -1,24 +1,31 @@
 import string
 
 from kivy.properties import DictProperty
-import datetime
-
+from kivy.uix import popup
+from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen
 
-from key_rings.private_key_ring import privateKeyRing, PrivateKeyRing
-from rsa_util.rsa_util import generate_keys
+
+# close dialog method needs to be implemented
+class Popups(FloatLayout):
+    pass
 
 
 class GenerateKeysScreen(Screen):
     data = DictProperty({})
 
+    def show_popup(self):
+        show = Popups()
+        popup_window = Popup(title="Validation error", content=show,
+                             size_hint=(None, None), size=(200, 200))
+        popup_window.open()
+
     def confirm(self):
         if not ('name' in self.data and 'email' in self.data and 'key_size' in self.data and 'algorithm' in self.data):
-            # need popup dialog here
+            self.show_popup()
             print('All fields are required')
             return False
 
         # need generate key logic
         print(self.data)
-
-    pass
