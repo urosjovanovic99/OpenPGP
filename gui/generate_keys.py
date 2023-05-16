@@ -4,6 +4,10 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen
 from kivy.uix.widget import Widget
+import hashlib
+
+from key_rings.enumerations import ALGORITHM
+from rsa_util import rsa_util
 
 
 class ValidationPopup(FloatLayout):
@@ -12,6 +16,19 @@ class ValidationPopup(FloatLayout):
 
 class InputPasswordPopup(FloatLayout):
     data = DictProperty({})
+
+    def confirm(self):
+        if 'password' not in self.data:
+            return
+
+        password = self.data['password']
+        name = self.data['name']
+        email = self.data['email']
+        key_size = self.data['key_size']
+        algorithm = ALGORITHM.RSA if self.data['algorithm'] == 'RSA' else ALGORITHM.ELGAMAL
+        sha_password = hashlib.sha512(str(password).encode())
+        (public, priv) = rsa_util.generate_keys(key_size)
+        print(sha_password.hexdigest())
     pass
 
 
@@ -28,9 +45,10 @@ class GenerateKeysScreen(Screen):
 
     def show_input_password_popup(self):
         show = InputPasswordPopup()
-        self.validation_popup_window = Popup(title="Input password", content=show,
-                                             size_hint=(None, None), size=(200, 200))
-        self.validation_popup_window.open()
+        show.data = self.data
+        self.input_password_popup_window = Popup(title="Input password", content=show,
+                                                 size_hint=(None, None), size=(200, 200))
+        self.input_password_popup_window.open()
 
     def close_validation_popup(self):
         self.validation_popup_window.dismiss()
@@ -39,11 +57,8 @@ class GenerateKeysScreen(Screen):
         self.input_password_popup_window.dismiss()
 
     def confirm(self):
-        if not ('name' in self.data and 'email' in self.data and 'key_size' in self.data and 'algorithm' in self.data):
+        if 'name' not in self.data or 'email' not in self.data or 'key_size' not in self.data or 'algorithm' not in self.data:
             self.show_validation_popup()
-            print('All fields are required')
             return False
 
-        # need generate key logic
-        print(self.data)
         self.show_input_password_popup()
