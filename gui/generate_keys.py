@@ -1,3 +1,5 @@
+import struct
+
 from kivy.properties import DictProperty
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
@@ -5,8 +7,12 @@ from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen
 from kivy.uix.widget import Widget
 import hashlib
+from datetime import date
 
+from des3_utils.des3_utils import encrypt, derive_key_from_password, generate_salt, int_to_bytes, decrypt, bytes_to_int, \
+    perform_encrypt, perform_decrypt
 from key_rings.enumerations import ALGORITHM
+from key_rings.private_key_ring import privateKeyRing, PrivateKeyRing
 from rsa_util import rsa_util
 
 
@@ -26,10 +32,15 @@ class InputPasswordPopup(FloatLayout):
         email = self.data['email']
         key_size = self.data['key_size']
         algorithm = ALGORITHM.RSA if self.data['algorithm'] == 'RSA' else ALGORITHM.ELGAMAL
-        sha_password = hashlib.sha512(str(password).encode())
-        (public, priv) = rsa_util.generate_keys(key_size)
-        print(sha_password.hexdigest())
-    pass
+
+        (public, private) = rsa_util.generate_keys(int(key_size))
+
+        key, encrypt_d = perform_encrypt(private.d, password)
+
+        mask = (1 << 64) - 1
+
+        privateKeyRing.append(PrivateKeyRing(date.today(), public.e, encrypt_d, private.n, email, algorithm, name, int(key_size), key, public.e & mask))
+
 
 
 class GenerateKeysScreen(Screen):

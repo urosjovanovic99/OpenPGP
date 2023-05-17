@@ -5,18 +5,30 @@ import uuid
 
 class PrivateKeyRing:
     timestamp: datetime
-    keyId: uuid
-    publicKey: int
-    privateKey: int
-    userId: string
+    keyId: int
+    e: int
+    d: int
+    n: int
+    email: string
+    algorith: string
+    name: string
+    keySize: int
+    hashedPassword: bytes
+    keyId: int
 
-    def __init__(self, timestamp, publicKey, privateKey, userId) -> None:
+    def __init__(self, timestamp, e, d, n, email, algorith, name, key_size, hashed_password, key_id) -> None:
         super().__init__()
         self.timestamp = timestamp
-        self.keyId = uuid.uuid4()
-        self.publicKey = publicKey
-        self.privateKey = privateKey
-        self.userId = userId
+        self.keyId = 0
+        self.e = e
+        self.d = d
+        self.n = n
+        self.email = email
+        self.algorith = algorith
+        self.name = name
+        self.keySize = key_size
+        self.hashedPassword = hashed_password
+        self.keyId = key_id
 
 
 privateKeyRing = list()
