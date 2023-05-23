@@ -89,6 +89,8 @@
 
     Button:
         text: "Confirm"
-        on_press: root.confirm()
+        on_press:
+            root.confirm()
+            app.root.get_screen('generate_keys_screen').close_input_password_popup()
         size_hint: 1, 0.2
         pos_hint: {"x":0, "y":0.1}

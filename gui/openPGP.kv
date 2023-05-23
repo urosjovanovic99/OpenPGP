@@ -13,6 +13,10 @@
             text: 'Delete keys'
             background_color: 0, 1, 1, 1
             font_size: 40
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = 1
+                root.manager.current = 'delete_keys'
         Button:
             text: 'Import key'
             background_color: 0, 1, 1, 1

@@ -1,6 +1,5 @@
 import datetime
 import string
-import uuid
 
 
 class PrivateKeyRing:
@@ -31,4 +30,4 @@ class PrivateKeyRing:
         self.keyId = key_id
 
 
-privateKeyRing = list()
+privateKeyRing = []

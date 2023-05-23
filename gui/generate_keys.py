@@ -1,14 +1,8 @@
-import struct
-
 from kivy.properties import DictProperty
 from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.gridlayout import GridLayout
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen
-from kivy.uix.widget import Widget
-import hashlib
 from datetime import date
-
 from des3_utils.des3_utils import encrypt, derive_key_from_password, generate_salt, int_to_bytes, decrypt, bytes_to_int, \
     perform_encrypt, perform_decrypt
 from key_rings.enumerations import ALGORITHM
@@ -48,6 +42,7 @@ class GenerateKeysScreen(Screen):
     validation_popup_window: Popup = None
     input_password_popup_window: Popup = None
 
+
     def show_validation_popup(self):
         show = ValidationPopup()
         self.validation_popup_window = Popup(title="Validation error", content=show,
@@ -73,3 +68,4 @@ class GenerateKeysScreen(Screen):
             return False
 
         self.show_input_password_popup()
+        self.manager.current = 'open_pgp_screen'
