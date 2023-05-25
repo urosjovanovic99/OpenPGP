@@ -33,7 +33,7 @@ class InputPasswordPopup(FloatLayout):
 
         mask = (1 << 64) - 1
 
-        privateKeyRing.append(PrivateKeyRing(date.today(), public.e, encrypt_d, private.n, email, algorithm, name, int(key_size), key, public.e & mask))
+        privateKeyRing.append(PrivateKeyRing(date.today(), public.e, encrypt_d, private.n, email, "RSA", name, int(key_size), key, public.e & mask))
 
 
 

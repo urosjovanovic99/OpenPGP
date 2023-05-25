@@ -1,9 +1,22 @@
 <DeleteKeysScreen>:
-    orientation: 'vertical'
+    id: main_win
+    RecycleView:
+        viewclass: 'CustomLabel'
+        id: table_floor
+        RecycleGridLayout:
+            id: table_floor_layout
+            cols: 5
+            default_size: (None,250)
+            default_size_hint: (1,None)
+            size_hint_y: None
+            height: self.minimum_height
+            spacing: 5
 
-    ScrollView:
-        BoxLayout:
-            id: box_layout
-            orientation: 'vertical'
-            spacing: '5dp'
-            padding: '10dp'
+<CustomLabel@Label>:
+    bcolor: (1,1,1,1)
+    canvas.before:
+        Color:
+            rgba: root.bcolor
+        Rectangle:
+            size: self.size
+            pos: self.pos
