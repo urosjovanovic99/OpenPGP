@@ -5,13 +5,17 @@
         orientation: 'vertical'
         BoxLayout:
             size_hint_y: None
-            height: 30
+            height: 50
             Button:
                 text: 'Load'
                 on_release: root.show_load()
-            Button:
-                text: 'Save'
-                on_release: root.show_save()
+            Spinner:
+                id: algorithm_spinner
+                text: root.data['key_type'] if 'key_type' in root.data else 'Select type'
+                on_text: root.data['key_type'] = self.text
+                values: ['PUBLIC', 'PRIVATE']
+                size_hint_y: None
+                height: dp(50)
 
         BoxLayout:
             TextInput:
@@ -40,30 +44,3 @@
             Button:
                 text: "Load"
                 on_release: root.load(filechooser.path, filechooser.selection)
-
-<SaveDialog>:
-    text_input: text_input
-    BoxLayout:
-        size: root.size
-        pos: root.pos
-        orientation: "vertical"
-        FileChooserListView:
-            id: filechooser
-            on_selection: text_input.text = self.selection and self.selection[0] or ''
-
-        TextInput:
-            id: text_input
-            size_hint_y: None
-            height: 30
-            multiline: False
-
-        BoxLayout:
-            size_hint_y: None
-            height: 30
-            Button:
-                text: "Cancel"
-                on_release: root.cancel()
-
-            Button:
-                text: "Save"
-                on_release: root.save(filechooser.path, text_input.text)

@@ -4,7 +4,7 @@ from kivy.uix.screenmanager import ScreenManager
 
 from gui.generate_keys.generate_keys import GenerateKeysScreen
 from gui.import_export.import_key import ImportKeyScreen
-from gui.main_screen.openPGP import OpenPGP
+from gui.main_screen.open_pgp import OpenPGP
 
 
 class OpenPGPApp(App):
@@ -15,7 +15,7 @@ class OpenPGPApp(App):
 def load_gui():
     Builder.load_file('gui/generate_keys/generate_keys.kv')
     Builder.load_file('gui/import_export/import_key.kv')
-    Builder.load_file('gui/main_screen/openPGP.kv')
+    Builder.load_file('gui/main_screen/open_pgp.kv')
 
 
 if __name__ == '__main__':

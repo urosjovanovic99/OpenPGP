@@ -1,9 +1,15 @@
 import os
 
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, DictProperty
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.popup import Popup
 from kivy.uix.screenmanager import Screen
+
+from key_rings.private_key_ring import privateKeyRing
+from key_rings.public_key_ring import publicKeyRing
+from rsa_util.rsa_util import import_from_file
+
+from key_rings.enumerations import KEY
 
 
 class LoadDialog(FloatLayout):
@@ -18,6 +24,7 @@ class SaveDialog(FloatLayout):
 
 
 class ImportKeyScreen(Screen):
+    data = DictProperty({})
     loadfile = ObjectProperty(None)
     savefile = ObjectProperty(None)
     text_input = ObjectProperty(None)
@@ -38,15 +45,13 @@ class ImportKeyScreen(Screen):
         self._popup.open()
 
     def load(self, path, filename):
-        # need to implement logic for import pam file
-        with open(os.path.join(path, filename[0])) as stream:
-            self.text_input.text = stream.read()
+        file_path = os.path.join(path, filename[0])
+        if 'key_type' in self.data:
+            with open(file_path) as stream:
+                self.text_input.text = stream.read()
+            key_type = KEY.PUBLIC if self.data['key_type'] == 'PUBLIC' else KEY.PRIVATE
+            key = import_from_file(file_path, key_type)
+            publicKeyRing.append(key) if key_type == KEY.PUBLIC else privateKeyRing.append(key)
 
         self.dismiss_popup()
 
-    def save(self, path, filename):
-        # need to implement logic for export pam file
-        with open(os.path.join(path, filename), 'w') as stream:
-            stream.write(self.text_input.text)
-
-        self.dismiss_popup()

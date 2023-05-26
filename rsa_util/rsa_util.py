@@ -7,15 +7,14 @@ def generate_keys(nbits):
     return publicKey, privateKey
 
 
-def import_from_file(path, keyType: KEY):
+def import_from_file(path, keyType):
     with open(path, mode='rb') as file:
         keydata = file.read()
-    key = rsa.key.AbstractKey()
+    key = None
     if keyType == KEY.PRIVATE:
-        key = rsa.key.PrivateKey()
+        key = rsa.key.PrivateKey.load_pkcs1(keydata)
     elif keyType == KEY.PUBLIC:
-        key = rsa.key.PublicKey()
-    key.load_pkcs1(keydata)
+        key = rsa.key.PublicKey.load_pkcs1(keydata)
     return key
 
 
