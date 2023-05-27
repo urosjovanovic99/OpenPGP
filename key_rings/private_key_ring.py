@@ -1,5 +1,6 @@
 import datetime
 import string
+import uuid
 
 
 class PrivateKeyRing:
@@ -28,6 +29,7 @@ class PrivateKeyRing:
         self.keySize = key_size
         self.hashedPassword = hashed_password
         self.keyId = key_id
+        self.id = uuid.uuid4()
 
 
 privateKeyRing = []
