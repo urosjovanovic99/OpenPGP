@@ -6,14 +6,14 @@
         RecycleGridLayout:
             id: table_floor_layout
             cols: 5
-            default_size: (None,250)
-            default_size_hint: (1,None)
+            default_size: (None, 250)
+            default_size_hint: (1, None)
             size_hint_y: None
             height: self.minimum_height
             spacing: 5
 
-<CustomLabel@Label>:
-    bcolor: (1,1,1,1)
+<CustomLabel>:
+    bcolor: (1, 1, 1, 1)
     canvas.before:
         Color:
             rgba: root.bcolor
