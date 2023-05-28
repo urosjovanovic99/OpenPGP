@@ -21,6 +21,10 @@
             text: 'Import key'
             background_color: 0, 1, 1, 1
             font_size: 40
+            on_press:
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = 1
+                root.manager.current = 'import_key_screen'
         Button:
             text: 'Export key'
             background_color: 0, 1, 1, 1

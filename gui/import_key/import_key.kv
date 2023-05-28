@@ -1,0 +1,46 @@
+<ImportKeyScreen>:
+    text_input: text_input
+
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: 50
+            Button:
+                text: 'Load'
+                on_release: root.show_load()
+            Spinner:
+                id: algorithm_spinner
+                text: root.data['key_type'] if 'key_type' in root.data else 'Select type'
+                on_text: root.data['key_type'] = self.text
+                values: ['PUBLIC', 'PRIVATE']
+                size_hint_y: None
+                height: dp(50)
+
+        BoxLayout:
+            TextInput:
+                id: text_input
+                text: ''
+
+            RstDocument:
+                text: text_input.text
+                show_errors: True
+
+<LoadDialog>:
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Load"
+                on_release: root.load(filechooser.path, filechooser.selection)

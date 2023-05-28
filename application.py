@@ -16,9 +16,9 @@ class OpenPGPApp(App):
 
 
 def load_gui():
-    Builder.load_file('./gui/generate_keys.kv')
-    Builder.load_file('./gui/openPGP.kv')
-    Builder.load_file('./gui/delete_keys.kv')
+    Builder.load_file('gui/generate_keys/generate_keys.kv')
+    Builder.load_file('gui/import_key/import_key.kv')
+    Builder.load_file('gui/main_screen/open_pgp.kv')
 
 
 if __name__ == '__main__':
@@ -26,5 +26,5 @@ if __name__ == '__main__':
     screen_manager = ScreenManager()
     screen_manager.add_widget(OpenPGP(name="open_pgp_screen"))
     screen_manager.add_widget(GenerateKeysScreen(name="generate_keys_screen"))
-    screen_manager.add_widget(DeleteKeysScreen(name="delete_keys"))
+    screen_manager.add_widget(ImportKeyScreen(name="import_key_screen"))
     OpenPGPApp().run()
