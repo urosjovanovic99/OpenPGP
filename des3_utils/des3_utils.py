@@ -59,7 +59,7 @@ def perform_encrypt(d, password):
     salt = generate_salt()
     key = derive_key_from_password(password, salt)
 
-    return key, encrypt(plaintext_bytes, key)
+    return key, encrypt(plaintext_bytes, key), salt
 
 
 def perform_decrypt(encrypt_d, key):

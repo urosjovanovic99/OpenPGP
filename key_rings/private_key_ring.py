@@ -15,8 +15,9 @@ class PrivateKeyRing:
     keySize: int
     hashedPassword: bytes
     keyId: int
+    salt: bytes
 
-    def __init__(self, timestamp, e, d, n, email, algorith, name, key_size, hashed_password, key_id) -> None:
+    def __init__(self, timestamp, e, d, n, email, algorith, name, key_size, hashed_password, key_id, salt) -> None:
         super().__init__()
         self.timestamp = timestamp
         self.keyId = 0
@@ -30,6 +31,7 @@ class PrivateKeyRing:
         self.hashedPassword = hashed_password
         self.keyId = key_id
         self.id = uuid.uuid4()
+        self.salt = salt
 
 
 privateKeyRing = []

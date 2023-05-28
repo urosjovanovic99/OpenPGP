@@ -1,3 +1,4 @@
+from des3_utils.des3_utils import derive_key_from_password, generate_salt
 from key_rings.private_key_ring import privateKeyRing
 
 
@@ -14,3 +15,12 @@ def get_property_by_value(name, ring):
     elif name == 'D':
         return ring.d
     return None
+
+
+def compare_passwords(password, ring):
+    hashed = derive_key_from_password(password, ring.salt)
+
+    if ring.hashedPassword == hashed:
+        return True
+    else:
+        return False

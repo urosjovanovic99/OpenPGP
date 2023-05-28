@@ -29,19 +29,19 @@ class InputPasswordPopup(FloatLayout):
 
         (public, private) = rsa_util.generate_keys(int(key_size))
 
-        key, encrypt_d = perform_encrypt(private.d, password)
+        key, encrypt_d, salt = perform_encrypt(private.d, password)
 
         mask = (1 << 64) - 1
 
-        privateKeyRing.append(PrivateKeyRing(date.today(), public.e, encrypt_d, private.n, email, "RSA", name, int(key_size), key, public.e & mask))
-
+        privateKeyRing.append(
+            PrivateKeyRing(date.today(), public.e, encrypt_d, private.n, email, "RSA", name, int(key_size), key,
+                           public.e & mask, salt))
 
 
 class GenerateKeysScreen(Screen):
     data = DictProperty({})
     validation_popup_window: Popup = None
     input_password_popup_window: Popup = None
-
 
     def show_validation_popup(self):
         show = ValidationPopup()
